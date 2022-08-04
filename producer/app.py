@@ -2,7 +2,8 @@ import sys
 
 from fastapi import FastAPI
 sys.path = ['', '..'] + sys.path[1:]
-from producer.router import route
+from router import route
+
 
 app = FastAPI()
 

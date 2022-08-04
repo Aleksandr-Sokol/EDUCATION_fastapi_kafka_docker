@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from producer.schema import Message
+from schema import Message
 from config import loop, KAFKA_BOOTSTRAP_SERVERS, KAFKA_CONSUMER_GROUP, KAFKA_TOPIC
 from aiokafka import AIOKafkaProducer
 import json
