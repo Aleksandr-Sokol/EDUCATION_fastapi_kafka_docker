@@ -3,7 +3,7 @@ import sys
 import asyncio
 from fastapi import FastAPI
 sys.path = ['', '..'] + sys.path[1:]
-from consumer.router import consume, consumer
+from router import consume
 
 app = FastAPI()
 

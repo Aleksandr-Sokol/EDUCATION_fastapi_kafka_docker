@@ -49,11 +49,25 @@ services:
     command: uvicorn app:app --reload --workers 1 --host 0.0.0.0 --port 8000
     ports:
       - '5005:8000'
-    volumes:
-      - ./producer:/app
     environment:
       - KAFKA_HOST=kafka
       - KAFKA_PORT=9092
+    depends_on:
+      - kafka
+      - zookeeper
+      - kafdrop
+
+  consumer:
+    build:
+      context: .
+      dockerfile: ./consumer/Dockerfile
+    command: uvicorn app:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    ports:
+      - '5006:8000'
+    environment:
+      - KAFKA_HOST=kafka
+      - KAFKA_PORT=9092
+      - KAFKA_TOPIC=kafka_message
     depends_on:
       - kafka
       - zookeeper
