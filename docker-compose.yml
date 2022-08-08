@@ -113,6 +113,8 @@ services:
       - '5007:5007'
     expose:
       - "9092"
+    environment:
+      - KAFKA_CONSUMER_GROUP=group_id
     depends_on:
       - producer
       - kafka

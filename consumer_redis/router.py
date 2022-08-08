@@ -1,9 +1,9 @@
 import aioredis
-
 from config import loop, KAFKA_BOOTSTRAP_SERVERS, KAFKA_CONSUMER_GROUP, KAFKA_TOPIC, KAFKA_TOPIC_REDIS
 from aiokafka import AIOKafkaConsumer
 import json
 from fastapi import Depends, APIRouter, Query
+import os
 
 
 def is_simple(num: int) -> bool:
@@ -33,7 +33,7 @@ def calc(num: int):
 
 async def consume():
     consumer = AIOKafkaConsumer(KAFKA_TOPIC_REDIS, loop=loop,
-                                bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS, group_id=KAFKA_CONSUMER_GROUP)
+                                bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS, group_id=os.environ['KAFKA_CONSUMER_GROUP'])
     await consumer.start()
     redis = aioredis.from_url("redis://redis")
     try:
