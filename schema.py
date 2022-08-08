@@ -4,6 +4,10 @@ class Message(BaseModel):
     message: str
 
 
+class NumSchema(BaseModel):
+    value: int
+
+
 class UserSchema(BaseModel):
     name: str
     family: str

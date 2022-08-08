@@ -9,7 +9,12 @@ from schema import UserSchema, DataSchema
 from core.db import AsyncSession, async_session
 
 
-async def create_user(data: dict, db: AsyncSession = Depends(get_async_db)):
+def get_text():
+    return 'ASDFG'
+
+
+async def create_user(data: dict, db: AsyncSession = Depends(get_async_db), text: str = Depends(get_text)):
+    print(f'POST: {text}')
     print(f'POST: {db}, {type(db)}')
     data_crud = UserDataCRUD()
     return await data_crud.create(async_session(), **data)  # Для ассинхронного запуска
