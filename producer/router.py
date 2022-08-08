@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from schema import Message, User
+from schema import Message, UserSchema
 from config import loop, KAFKA_BOOTSTRAP_SERVERS, KAFKA_CONSUMER_GROUP, KAFKA_TOPIC
 from aiokafka import AIOKafkaProducer
 import json
@@ -21,7 +21,7 @@ async def send(message: Message):
 
 
 @route.post('/user')
-async def send(user: User):
+async def send(user: UserSchema):
     producer = AIOKafkaProducer(
         loop=loop, bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS)
     await producer.start()
