@@ -10,6 +10,7 @@ from core.db import AsyncSession, async_session
 
 
 async def create_user(data: dict, db: AsyncSession = Depends(get_async_db)):
+    print(f'POST: {db}, {type(db)}')
     data_crud = UserDataCRUD()
     return await data_crud.create(async_session(), **data)  # Для ассинхронного запуска
 
@@ -35,5 +36,6 @@ router = APIRouter(
 
 @router.get("/{data_id}", response_model=DataSchema)
 async def data(data_id: int, db: AsyncSession = Depends(get_async_db)) -> DataSchema:
+    print(f'GET: {db}, {type(db)}')
     data_crud = UserDataCRUD()
     return await data_crud.get(db, data_id)  # Для ассинхронного запуска
