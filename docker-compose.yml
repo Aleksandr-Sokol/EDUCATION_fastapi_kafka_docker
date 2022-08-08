@@ -78,6 +78,8 @@ services:
       - kafka
       - zookeeper
       - kafdrop
+    volumes:
+      - ./sqlite_db:/app/sqlite_db
 
 networks:
   kafka_bridge:
